@@ -6,10 +6,13 @@ def earliest_ancestor(ancestors, starting_node):
     # Instantiate family tree as an empty Graph instance
     family_tree = Graph()
 
-    # Build family tree from ancestors
+    # Add all nodes as vertices to family_tree
     for pair in ancestors:
         family_tree.add_vertex(pair[0])
         family_tree.add_vertex(pair[1])
+
+    # Add edges from ancestors
+    for pair in ancestors:
         family_tree.add_edge(pair[1], pair[0])
 
     # BFS to find furthest "ripple". Instantiate empty queue
@@ -62,3 +65,7 @@ def earliest_ancestor(ancestors, starting_node):
             q.enqueue(new_path)
 
     return earliest_ancestor
+
+test_ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
+
+print(earliest_ancestor(test_ancestors, 3))
